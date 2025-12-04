@@ -10,7 +10,5 @@ export interface DateTimeInput {
   minute: number;
   second: number;
   timezone: string;
-  options?: {
-    useMilliseconds?: boolean;
-  };
+  useMilliseconds?: boolean;
 }

@@ -1,6 +1,6 @@
 {
-  "name": "@perdieminc/time-to-unix",
-  "version": "1.0.0",
+  "name": "time-to-unix-converter",
+  "version": "1.0.1",
   "description": "Convert date/time components with timezone support to Unix timestamps",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -9,6 +9,7 @@
     "test": "jest",
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage",
+    "prepare": "npm run build",
     "prepublishOnly": "npm run build",
     "lint": "eslint src tests --ext .ts",
     "format": "prettier --write \"src/**/*.ts\" \"tests/**/*.ts\""

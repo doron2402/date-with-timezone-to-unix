@@ -2,7 +2,7 @@
 
 A TypeScript/JavaScript library for converting date/time components with timezone support to Unix timestamps.
 
-[![npm version](https://badge.fury.io/js/%40perdiem%2Funix-time-converter.svg)](https://www.npmjs.com/package/@perdiem/unix-time-converter)
+[![npm version](https://badge.fury.io/js/time-to-unix-converter.svg)](https://www.npmjs.com/package/time-to-unix-converter)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 ## Features

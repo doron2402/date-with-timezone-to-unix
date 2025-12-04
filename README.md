@@ -18,21 +18,21 @@ A TypeScript/JavaScript library for converting date/time components with timezon
 ## Installation
 
 ```bash
-npm install @perdiem/unix-time-converter
+npm install time-to-unix-converter
 ```
 
 ```bash
-yarn add @perdiem/unix-time-converter
+yarn add time-to-unix-converter
 ```
 
 ```bash
-pnpm add @perdiem/unix-time-converter
+pnpm add time-to-unix-converter
 ```
 
 ## Quick Start
 
 ```typescript
-import { dateToUnixTime } from '@perdiem/unix-time-converter';
+import { dateToUnixTime } from 'time-to-unix-converter';
 
 // Using UTC offset
 const timestamp = dateToUnixTime(2024, 12, 4, 14, 30, 0, '+05:30');

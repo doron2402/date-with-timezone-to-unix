@@ -78,6 +78,7 @@ interface DateTimeInput {
   minute: number;
   second: number;
   timezone: string;
+  useMilliseconds: boolean;
 }
 ```
 

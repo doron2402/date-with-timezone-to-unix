@@ -7,7 +7,7 @@ A TypeScript/JavaScript library for converting date/time components with timezon
 
 ## Features
 
-✅ **Timezone Support**: Handle both UTC offsets (`+05:30`, `-08:00`) and IANA timezone names (`America/New_York`, `Asia/Kolkata`)
+✅ **Timezone Support**: Handle both UTC offsets (`+05:30`, `-08:00`) and IANA timezone names (`America/New_York`, `Asia/Kolkata`, `Asia/Tel_Aviv`)
 ✅ **DST Aware**: Automatically handles Daylight Saving Time transitions
 ✅ **Type Safe**: Full TypeScript support with comprehensive type definitions
 ✅ **Well Tested**: 100% test coverage with extensive edge case validation
@@ -45,9 +45,9 @@ console.log(nyTimestamp); // 1733309400
 
 ## API Reference
 
-### `dateToUnixTime(year, month, day, hour, minute, second, timezone)`
+### `dateToUnixTime(year, month, day, hour, minute, second, timezone, useMilliseconds?)`
 
-Converts date/time components to Unix timestamp (seconds since Jan 1, 1970 UTC).
+Converts date/time components to Unix timestamp.
 
 **Parameters:**
 - `year` (number): Full year (e.g., 2024)
@@ -57,8 +57,9 @@ Converts date/time components to Unix timestamp (seconds since Jan 1, 1970 UTC).
 - `minute` (number): Minute (0-59)
 - `second` (number): Second (0-59)
 - `timezone` (string): UTC offset (`"+05:30"`, `"-08:00"`, `"Z"`) or IANA timezone name (`"America/New_York"`)
+- `useMilliseconds` (boolean, optional): If `true`, returns timestamp in milliseconds instead of seconds. Defaults to `false`.
 
-**Returns:** Unix timestamp in seconds (number)
+**Returns:** Unix timestamp in seconds (number), or milliseconds if `useMilliseconds` is `true`
 
 **Throws:** Error if inputs are invalid
 
@@ -78,7 +79,7 @@ interface DateTimeInput {
   minute: number;
   second: number;
   timezone: string;
-  useMilliseconds: boolean;
+  useMilliseconds?: boolean;  // Optional: if true, returns milliseconds instead of seconds
 }
 ```
 
@@ -102,7 +103,7 @@ Converts Unix timestamp back to ISO 8601 string.
 ### Example 1: UTC Offset Format
 
 ```typescript
-import { dateToUnixTime } from '@perdiem/unix-time-converter';
+import { dateToUnixTime } from 'time-to-unix-converter';
 
 // India Standard Time (UTC+5:30)
 const istTimestamp = dateToUnixTime(2024, 12, 4, 18, 0, 0, '+05:30');
@@ -120,7 +121,7 @@ console.log(utcTimestamp); // 1733309400
 ### Example 2: IANA Timezone Names
 
 ```typescript
-import { dateToUnixTime } from '@perdiem/unix-time-converter';
+import { dateToUnixTime } from 'time-to-unix-converter';
 
 // New York (automatically handles EST/EDT)
 const nyTime = dateToUnixTime(2024, 12, 4, 7, 30, 0, 'America/New_York');
@@ -138,7 +139,7 @@ console.log(londonTime); // 1733309400
 ### Example 3: Object Input
 
 ```typescript
-import { dateToUnixTimeFromObject, DateTimeInput } from '@perdiem/unix-time-converter';
+import { dateToUnixTimeFromObject, DateTimeInput } from 'time-to-unix-converter';
 
 const input: DateTimeInput = {
   year: 2024,
@@ -157,7 +158,7 @@ console.log(timestamp); // 1733309400
 ### Example 4: Current Time and Conversion
 
 ```typescript
-import { getCurrentUnixTime, unixTimeToIso } from '@perdiem/unix-time-converter';
+import { getCurrentUnixTime, unixTimeToIso } from 'time-to-unix-converter';
 
 // Get current timestamp
 const now = getCurrentUnixTime();
@@ -171,7 +172,7 @@ console.log(iso); // e.g., "2024-12-04T12:30:00.000Z"
 ### Example 5: Restaurant Ordering System (Per Diem Use Case)
 
 ```typescript
-import { dateToUnixTime } from '@perdiem/unix-time-converter';
+import { dateToUnixTime } from 'time-to-unix-converter';
 
 // Customer places order in their local timezone
 const orderPlacedAt = dateToUnixTime(
@@ -194,7 +195,7 @@ console.log(`Order time (Local): ${orderDate.toLocaleString('en-US', {
 ### Example 6: Scheduling Future Orders
 
 ```typescript
-import { dateToUnixTime, unixTimeToIso } from '@perdiem/unix-time-converter';
+import { dateToUnixTime, unixTimeToIso } from 'time-to-unix-converter';
 
 // Schedule order for pickup tomorrow at 12:00 PM EST
 const pickupTime = dateToUnixTime(2024, 12, 5, 12, 0, 0, 'America/New_York');
@@ -214,10 +215,24 @@ console.log(order);
 // }
 ```
 
-### Example 7: Error Handling
+### Example 7: Using Milliseconds
 
 ```typescript
-import { dateToUnixTime } from '@perdiem/unix-time-converter';
+import { dateToUnixTime } from 'time-to-unix-converter';
+
+// Get timestamp in seconds (default)
+const timestampSeconds = dateToUnixTime(2024, 12, 4, 14, 30, 0, '+05:30');
+console.log(timestampSeconds); // 1733309400
+
+// Get timestamp in milliseconds
+const timestampMilliseconds = dateToUnixTime(2024, 12, 4, 14, 30, 0, '+05:30', true);
+console.log(timestampMilliseconds); // 1733309400000
+```
+
+### Example 8: Error Handling
+
+```typescript
+import { dateToUnixTime } from 'time-to-unix-converter';
 
 try {
   // This will throw an error - invalid month
@@ -330,7 +345,7 @@ npm run test:coverage
 This library is written in TypeScript and includes full type definitions.
 
 ```typescript
-import { dateToUnixTime, DateTimeInput } from '@perdiem/unix-time-converter';
+import { dateToUnixTime, DateTimeInput } from 'time-to-unix-converter';
 
 // TypeScript will provide full autocomplete and type checking
 const timestamp: number = dateToUnixTime(2024, 12, 4, 14, 30, 0, '+05:30');
@@ -392,6 +407,10 @@ Website: [tryperdiem.com](https://tryperdiem.com)
 - 💬 [Discussions](https://github.com/perdiem/unix-time-converter/discussions)
 
 ## Changelog
+
+### 1.0.2
+- Added `useMilliseconds` parameter to return timestamps in milliseconds instead of seconds
+- Updated package name to `time-to-unix-converter`
 
 ### 1.0.0 (Initial Release)
 - Core functionality for converting date/time to Unix timestamps

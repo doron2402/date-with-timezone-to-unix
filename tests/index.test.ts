@@ -80,6 +80,13 @@ describe('dateToUnixTime', () => {
       expect(timestamp).toBe(1733315400);
     });
 
+    test('should convert Asia/Kolkata timezone', () => {
+      // Dec 4, 2024, 18:00:00 in Kolkata (IST, UTC+5:30)
+      // This is 12:30:00 UTC
+      const timestamp = dateToUnixTime(2024, 12, 4, 18, 0, 0, 'Asia/Kolkata', true);
+      expect(timestamp).toBe(1733315400000);
+    });
+
     test('should convert Europe/London timezone', () => {
       // Dec 4, 2024, 12:30:00 in London (GMT, UTC+0)
       // This is 12:30:00 UTC
